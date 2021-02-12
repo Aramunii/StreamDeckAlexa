@@ -18,7 +18,13 @@ $(document).ready(function () {
 
 
     $('#ChangePage').on('click',function () {
-        alexaClient.skill.sendMessage('message', messageSentCallback);
+        try{
+            alexaClient.skill.sendMessage('message', messageSentCallback);
+        }
+        catch (e) {
+            document.getElementById('debugElement').innerHTML = e;
+
+        }
 
     })
 });
