@@ -23,7 +23,7 @@ $(document).ready(function () {
                 intent: "AnswerIntent",
                 shape: "cuadrado",
                 color: "green"
-            }, messageSentCallback);
+            }, 'messageSentCallback');
         }
         catch (e) {
             document.getElementById('debugElement').innerHTML = e;
