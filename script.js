@@ -1,11 +1,8 @@
 $(document).ready(function () {
 
-   $('#ChangePage').on('click',function () {
-       window.location.href = 'www.google.com';
-   })
 
-    var alexaClient;
-    Alexa.create({version: '1.1'})
+
+    var alexaClient = Alexa.create({version: '1.1'})
         .then((args) => {
             const {
                 alexa,
@@ -19,5 +16,10 @@ $(document).ready(function () {
         });
 
 
+
+    $('#ChangePage').on('click',function () {
+        alexaClient.skill.sendMessage('message', messageSentCallback);
+
+    })
 });
 
