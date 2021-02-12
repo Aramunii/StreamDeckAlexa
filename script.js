@@ -19,7 +19,11 @@ $(document).ready(function () {
 
     $('#ChangePage').on('click',function () {
         try{
-            alexaClient.skill.sendMessage('message', messageSentCallback);
+            alexaClient.skill.sendMessage({
+                intent: "AnswerIntent",
+                shape: "cuadrado",
+                color: "green"
+            }, messageSentCallback);
         }
         catch (e) {
             document.getElementById('debugElement').innerHTML = e;
