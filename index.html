@@ -6,7 +6,8 @@
           content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="html/config/config.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"
+            integrity="sha256-NZlQFkif+Cpc0rqEGGpSmaU55Vw4aMWK5KC3BRACd/Q=" crossorigin="anonymous"></script>
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet"
           type="text/css">
@@ -26,7 +27,8 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
     <!-- /core JS files -->
 
@@ -37,7 +39,6 @@
     <script type="text/javascript" src="assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
     <script type="text/javascript" src="assets/js/plugins/ui/moment/moment.min.js"></script>
     <script type="text/javascript" src="assets/js/plugins/pickers/daterangepicker.js"></script>
-    <script type="text/javascript" src="assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
     <script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
 
 
@@ -51,20 +52,48 @@
     <script type="text/javascript" src="assets/js/plugins/pickers/color/spectrum.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    <script src="script.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="https://cdn.html.games.alexa.a2z.com/alexa-html/latest/alexa-html.js"></script>
 
-    <title>Loja de roupa</title>
+    <script src="script.js"></script>
+    <script src="pcinfo.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <title>STREAM DECK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        html,
+
+
+        /* latin-ext */
+        @font-face {
+            font-family: 'Righteous';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/righteous/v9/1cXxaUPXBpj2rGoU7C9WhnGFucE.woff2) format('woff2');
+            unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        /* latin */
+        @font-face {
+            font-family: 'Righteous';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/righteous/v9/1cXxaUPXBpj2rGoU7C9WiHGF.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
         body {
             /* otherwise the full screen would be white */
-            background: none;
+            background: black;
             margin-top: -14px;
             margin-right: 115px;
-            position: fixed;
+            background-size: cover;
             z-index: 3000;
+        }
+
+        .panel-body + .panel-body, .panel-body + .table, .panel-body + .table-responsive, .panel-body.has-top-border {
+            border-top: rgba(255, 255, 255, 0.53) !important;
         }
 
         button#btnMasc {
@@ -134,7 +163,6 @@
         }
 
 
-
         .close-image.active,
         .close-image:active {
             color: #fff;
@@ -142,7 +170,6 @@
             border-color: #5cb85c;
             outline: none;
         }
-
 
 
         .btn-success {
@@ -185,36 +212,207 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        @media (min-width: 769px) {
+            .layout-boxed .page-container, .layout-boxed .navbar .navbar-boxed, .layout-boxed .page-header .breadcrumb-boxed, .layout-boxed .page-header-content, .layout-boxed .footer-boxed {
+                width: 957px;
+            }
+        }
+
+        .panel {
+            margin-bottom: 20px;
+            border-width: 0;
+            color: #333333;
+            -webkit-box-shadow: blue !important;
+            box-shadow: none !important;
+        }
+
+        /* Style the video: 100% width and height to cover the entire window */
+        #myVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+        }
+
+        .thumbnail {
+            width: 130px;
+            height: 130px;
+        }
+
+        .thumb {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+        }
+
+
+        .playbutton {
+            margin-top: -21px !important;
+        }
+
+        @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400);
+
+        @import url("https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap");
+
+
+        .blockUI.blockOverlay {
+            z-index: 1000;
+            border: none;
+            margin: 0px;
+            padding: 0px;
+            width: 120% !important;
+            height: 128% !important;
+            top: -29px !important;
+            left: -3px !important;
+            background-color: rgb(255, 255, 255);
+            opacity: 0.8;
+            cursor: wait;
+            position: absolute;
+        }
+
+        i.icon-spinner2.spinner {
+            font-size: 300px;
+            left: 58px;
+            top: -115px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Righteous", normal;
+        }
+
+        h1 {
+            margin: 0 !important;
+            font-size: 8em !important;
+            padding: 0 !important;
+            color: white !important;
+            text-shadow: 0 0.1em 20px rgba(0, 0, 0, 1), 0.05em -0.03em 0 rgba(0, 0, 0, 1), 0.05em 0.005em 0 rgba(0, 0, 0, 1), 0em 0.08em 0 rgba(0, 0, 0, 1), 0.05em 0.08em 0 rgba(0, 0, 0, 1), 0px -0.03em 0 rgba(0, 0, 0, 1), -0.03em -0.03em 0 rgba(0, 0, 0, 1), -0.03em 0.08em 0 rgba(0, 0, 0, 1), -0.03em 0 0 rgba(0, 0, 0, 1) !important;
+            width: 900px;
+            left: -231px;
+            bottom: -39px;
+            position: absolute;
+        }
+
+        h1 span {
+            transform: scale(0.9) !important;
+            display: inline-block !important;
+        }
+
+        h1 span:first-child {
+            animation: bop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
+        }
+
+        h1 span:last-child {
+            animation: bopB 1s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite alternate;
+        }
+
+
+        @keyframes bop {
+            0% {
+                transform: scale(0.9);
+            }
+            50%,
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bopB {
+            0% {
+                transform: scale(0.9);
+            }
+            80%,
+            100% {
+                transform: scale(1) rotateZ(-3deg);
+            }
+        }
+
+
     </style>
 </head>
-
+<script src="https://kit.fontawesome.com/0468d724b9.js" crossorigin="anonymous"></script>
 <body id='body' class="body layout-boxed" style="display: block;">
-<div class="page-container ml-20" style="margin-top:60px">
-    <div class="panel panel-white">
+<video autoplay muted loop id="myVideo">
+    <source src="https://audiomeucomputador.s3-sa-east-1.amazonaws.com/geralt.mp4" type="video/mp4">
+</video>
+
+<div class="page-container ">
+    <div class="panel panel-footer-transparent">
         <div class="panel-heading" id="filter-schedule">
             <div class="heading-text">
                 <div class="form-inline">
                     <h6 class="panel-title text-semibold">ALEXA STREAM DECK </h6>
                 </div>
                 <div class="heading-elements">
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <button id="openInfo" class="btn btn-float-lg btn-float bg-teal-300" style=""><i
+                    class="fas fa-desktop text-brown-800"></i><span class="text-bold text-brown-800">PC</span></button>
+            <button id="openGames" class="btn btn-float-lg btn-float bg-teal-300" style=""><i
+                    class="fas fa-gamepad text-brown-800"></i><span class="text-bold text-brown-800">Jogos</span>
+            </button>
+            <button id="openApps" class="btn btn-float-lg btn-float bg-teal-300" style=""><i
+                    class="fas fa-list text-brown-800"></i><span class="text-bold text-brown-800">Apps</span></button>
+
+        </div>
+        <div class="panel-body" id="games" style="display: none">
+            <h5>Jogos</h5>
+            <div class="content-wrapper">
+                <div class="row" id="games_append">
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-body" id="apps" style="display: none">
+            <h5>Apps</h5>
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="thumbnail startApps" data-title="VISUAL STUDIO CODE" data-app="visualstudio">
+                            <div class="thumb">
+                                <img src="https://www.danysoft.com/wp-content/uploads/2015/02/microsoft-visual-studio-2011-1030x1030.jpg"
+                                     alt="">
+                                <div class="caption-overflow">
+                                    <span class="btn text-white btn-flat btn-icon btn-rounded legitRipple playbutton"><i
+                                            class="icon-play4"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail startApps " data-title="PHP STORM" data-app="phpstorm">
+                            <div class="thumb">
+                                <img src="https://blog.jetbrains.com/wp-content/uploads/2019/02/phpstorm_social.png"
+                                     alt="">
+                                <div class="caption-overflow">
+                                    <span class="btn text-white btn-flat btn-icon btn-rounded legitRipple playbutton"><i
+                                            class="icon-play4"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" id="infos" style="display: block">
+            <h5>Infos</h5>
+            <div class="content-wrapper" style="display: block">
+                <div class="row" id="teste_append">
+                    <div class="panel panel-body text-center" style="padding: 0px;background-color: #4db6ac;display: flex;border-radius: 31px;">
+                        <div id="ram" style="width: 200px;height:200px;"></div>
+                        <div id="cpu" style="width: 200px;height:200px;"></div>
+
+                    </div>
 
                 </div>
             </div>
         </div>
-        <div class="panel-body" id="products">
-            <h5>Produtos</h5>
-            <span id="debugElement"></span>
-                <button id="ChangePage" class="btn btn-block bg-teal-300">TESTE</button>
-        </div>
-        <div class="panel-footer text-center">
-            <span  class="text-muted text-size-mini">ALEXA STREAM DECK - Aramuni Mods 2021</span>
-        </div>
     </div>
-
 </div>
 </body>
-<script>
-
-</script>
-
 </html>

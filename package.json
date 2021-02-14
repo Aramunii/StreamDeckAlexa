@@ -1,0 +1,33 @@
+{
+  "name": "maer",
+  "version": "1.0.0",
+  "description": "You can use the [editor on GitHub](https://github.com/Aramunii/StreamDeckAlexa/edit/main/README.md) to maintain and preview the content for your website in Markdown files.",
+  "main": "aa.js",
+  "dependencies": {
+    "express": "^4.15.4",
+    "jquery": "^3.2.1",
+    "node-os-utils": "^1.3.2",
+    "node-process-windows": "^0.0.2",
+    "nvidia-gpu-monitor": "^2.0.1",
+    "os-usage": "^0.0.3",
+    "socket.io": "^2.0.3",
+    "systeminformation": "^5.3.0"
+  },
+  "devDependencies": {
+    "node-key-sender": "^1.0.11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aramunii/StreamDeckAlexa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aramunii/StreamDeckAlexa/issues"
+  },
+  "homepage": "https://github.com/Aramunii/StreamDeckAlexa#readme"
+}
