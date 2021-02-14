@@ -18,7 +18,7 @@ app.get('/', function (req, res) {
 
 
 io.on("connection", async function (client) {
-
+console.log("AAA")
     client.on('abrir', (data) => {
         if (data.type == 'emulator') {
             execSync('"C:\\Users\\Josuje\\Documents\\AssistantComputerControl\\shortcuts\\' + data.bat + '" ' + data.rom)
@@ -63,7 +63,10 @@ io.on("connection", async function (client) {
 });
 
 
-http.listen(3501, '', function () {
+
+
+
+http.listen(3500, '', function () {
     console.log('listening on port 3500');
 });
 

@@ -61,7 +61,7 @@ $(document).ready(function () {
     })
 
 
-    socket = io.connect("https://e2ba3a9fc6ae.ngrok.io");
+    socket = io.connect("http://170.245.126.255:3500/");
 
 
     socket.on('update', function (data) {
