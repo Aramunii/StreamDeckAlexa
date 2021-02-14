@@ -1,5 +1,22 @@
 $(document).ready(function () {
 
+   var pusher = new Pusher('a74c97a46cc83cbec53a', {
+        cluster: 'us2',
+        auth: {
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+            }
+        }
+    });
+
+
+    var channel = pusher.subscribe('my-channel');
+
+    channel.bind('my-event', function(data) {
+        alert('An event was triggered with message: ' + data.message);
+    });
+
+
     var games = [
         {
             name: 'Cyberpunk 2077',
@@ -61,13 +78,14 @@ $(document).ready(function () {
     })
 
 
-    socket = io.connect("http://170.245.126.255:3500/");
+  /*  socket = io.connect("http://170.245.126.255:3500/");
 
 
     socket.on('update', function (data) {
         console.log(data)
     })
 
+ */
 
     var alexaClient = Alexa.create({version: '1.1'})
         .then((args) => {
@@ -132,7 +150,7 @@ $(document).ready(function () {
             rom: rom,
             type: type
         };
-        socket.emit("abrir", infos);
+       // socket.emit("abrir", infos);
     })
 
     $('.startApps').on('click', function () {
@@ -193,9 +211,9 @@ $(document).ready(function () {
 
     }
 
-    socket.emit("pc_status", '');
+   // socket.emit("pc_status", '');
 
-    getPcStatus(5000,socket)
+    getPcStatus(5000,'socket')
 
 
 
@@ -229,7 +247,7 @@ function showLoading(status) {
 
 function getPcStatus(time,socket) {
      setTimeout(async function () {
-         socket.emit("pc_status", '');
+       //  socket.emit("pc_status", '');
 
          fetch('http://localhost:10445/metrics/json')
              .then(function(response) {

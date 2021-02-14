@@ -62,7 +62,18 @@ console.log("AAA")
 
 });
 
+const Pusher = require("pusher");
 
+const pusher = new Pusher({
+    appId: "1065666",
+    key: "a74c97a46cc83cbec53a",
+    secret: "cae416ad996cc2a23c0e",
+    cluster: "us2"
+});
+
+pusher.trigger("my-channel", "my-event", {
+    message: "hello world"
+});
 
 
 
