@@ -103,7 +103,7 @@ $(document).ready(function () {
             socket.emit("reset", '');
         }
         if(message.mode=='showInfo'){
-            show($('infos'),'infos');
+            show($('#infos'),'infos')
         }
 
     }
