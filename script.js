@@ -1,20 +1,13 @@
 $(document).ready(function () {
 
-   var pusher = new Pusher('a74c97a46cc83cbec53a', {
-        cluster: 'us2',
-        auth: {
-            headers: {
-                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
-            }
-        }
+
+    pusher = new Pusher('a74c97a46cc83cbec53a', {
+        cluster:'us2',
+        authEndpoint: 'https://authstreamdeck.herokuapp.com/pusher/auth'
     });
 
 
-    var channel = pusher.subscribe('my-channel');
-
-    channel.bind('my-event', function(data) {
-        alert('An event was triggered with message: ' + data.message);
-    });
+    channel = pusher.subscribe('private-channel');
 
 
     var games = [
@@ -44,8 +37,6 @@ $(document).ready(function () {
             video:'https://audiomeucomputador.s3-sa-east-1.amazonaws.com/Ryu+Street+Fighter+-+Live+Engine+Wallpaper.mp4'
         },
     ]
-
-
     var apps = [
         {
             name: 'Visual Studio Code',
@@ -79,16 +70,13 @@ $(document).ready(function () {
 
 
   /*  socket = io.connect("http://170.245.126.255:3500/");
-
-
     socket.on('update', function (data) {
         console.log(data)
     })
 
  */
 
-    var alexaClient = Alexa.create({version: '1.1'})
-        .then((args) => {
+    var alexaClient = Alexa.create({version: '1.1'}).then((args) => {
             const {
                 alexa,
                 message
@@ -99,9 +87,7 @@ $(document).ready(function () {
             processAlexaMessage(message) //procesa el mensaje de inicialización
             //asigna la funcion como callback para los mensajes recibidos
             client.skill.onMessage(processAlexaMessage);
-        })
-        .catch(error => {
-        });
+        }).catch(error => {});
 
     activeElem ='infos' ;
 
@@ -150,6 +136,12 @@ $(document).ready(function () {
             rom: rom,
             type: type
         };
+
+        channel.trigger(`client-Server`, {
+            option: 'abrir',
+            infos: infos
+        });
+
        // socket.emit("abrir", infos);
     })
 
@@ -212,10 +204,7 @@ $(document).ready(function () {
     }
 
    // socket.emit("pc_status", '');
-
-    getPcStatus(5000,'socket')
-
-
+    getPcStatus(2000,'socket')
 
 });
 
@@ -248,18 +237,7 @@ function showLoading(status) {
 function getPcStatus(time,socket) {
      setTimeout(async function () {
        //  socket.emit("pc_status", '');
-
-         fetch('http://localhost:10445/metrics/json')
-             .then(function(response) {
-                 // The response is a Response instance.
-                 // You parse the data into a useable format using `.json()`
-                 return response.json();
-             }).then(function(data) {
-             // `data` is the parsed version of the JSON returned from the above endpoint.
-             console.log(data);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
-
-
-         });
+         channel.trigger(`client-pcinfos`, {});
          getPcStatus(time,socket);
     }, time);
 }

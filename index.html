@@ -406,11 +406,19 @@
             <div class="content-wrapper" style="display: block">
                 <div class="row" id="teste_append">
                     <div class="panel panel-body text-center" style="padding: 0px;background-color: #4db6ac;display: flex;border-radius: 31px;">
-                        <div id="ram" style="width: 200px;height:200px;"></div>
-                        <div id="cpu" style="width: 200px;height:200px;"></div>
-
+                        <div class="col-md-6">
+                            <h5>USO DE RAM <br><span class="text-size-mini" id="totalRam"></span></h5>
+                            <div id="ram" style="width: 200px;height:200px;"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>USO DE CPU <br><span class="text-size-mini" id="cpuName"></span></h5>
+                            <div id="cpu" style="width: 200px;height:200px;"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>TEMP. GPU <br><span class="text-size-mini" id="gpuName"></span></h5>
+                            <div id="gpu" style="width: 200px;height:200px;"></div>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
