@@ -4,7 +4,6 @@ $(function () {
     buildCpuChart()
     buildGpuChart()
 
-
     channel.bind('client-pcinfos-load',function (data) {
         pcInfo = data.pcInfo;
         setRamData(pcInfo);
@@ -65,10 +64,6 @@ function setGpuData(pcInfo) {
     }
     GpuChart.setOption(GpuOption, true);
 }
-
-
-
-
 
 function bytesToSize(bytes) {
     var sizes = ['Bytes', 'GB', 'MB', 'GB', 'TB'];
