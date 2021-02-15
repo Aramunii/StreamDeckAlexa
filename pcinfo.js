@@ -7,23 +7,68 @@ $(function () {
 
     channel.bind('client-pcinfos-load',function (data) {
         pcInfo = data.pcInfo;
-
-        Ramoption.series[0].data[0].value = (pcInfo.memoryRam).toFixed(2) - 0;
-        ramChart.setOption(Ramoption, true);
-
-        CpuOption.series[0].data[0].value = ( pcInfo.CpuUsage ).toFixed(2) - 0;
-        cpuChart.setOption(CpuOption, true);
-
-        GpuOption.series[0].data[0].value = ( pcInfo.GpuTemperature ).toFixed(2) - 0;
-        GpuChart.setOption(GpuOption, true);
-
-        $("#totalRam").text(bytesToSize(pcInfo.TotalRam))
-        $("#cpuName").text(pcInfo.CpuName)
-        $("#gpuName").text(pcInfo.GpuName);
-
+        setRamData(pcInfo);
+        setCpuData(pcInfo)
+        setGpuData(pcInfo)
     })
 
 })
+
+function setRamData(pcInfo) {
+    $("#totalRam").text(bytesToSize(pcInfo.TotalRam))
+
+    Ramoption.series[0].data[0].value = (pcInfo.memoryRam).toFixed(2) - 0;
+
+    if(pcInfo.memoryRam >= 50 && pcInfo.memoryRam <= 80){
+        Ramoption.series[0].itemStyle.color = '#f1803f'
+        Ramoption.series[0].itemStyle.shadowColor = '#a05c29'
+    }else if(pcInfo.memoryRam >= 81){
+        Ramoption.series[0].itemStyle.color = '#cd1717'
+        Ramoption.series[0].itemStyle.shadowColor = '#870e0e'
+    }else if(pcInfo.memoryRam <= 49){
+        Ramoption.series[0].itemStyle.color = '#55a10d'
+        Ramoption.series[0].itemStyle.shadowColor = '#438204'
+    }
+    ramChart.setOption(Ramoption, true);
+}
+
+function setCpuData(pcInfo) {
+    $("#cpuName").text(pcInfo.CpuName)
+
+    CpuOption.series[0].data[0].value = ( pcInfo.CpuUsage ).toFixed(2) - 0;
+    if(pcInfo.CpuUsage >= 50 && pcInfo.CpuUsage <= 80){
+        CpuOption.series[0].itemStyle.color = '#f1803f'
+        CpuOption.series[0].itemStyle.shadowColor = '#a05c29'
+    }else if(pcInfo.CpuUsage >= 81){
+        CpuOption.series[0].itemStyle.color = '#cd1717'
+        CpuOption.series[0].itemStyle.shadowColor = '#870e0e'
+    }else if(pcInfo.CpuUsage <=49) {
+        CpuOption.series[0].itemStyle.color = '#55a10d'
+        CpuOption.series[0].itemStyle.shadowColor = '#438204'
+    }
+    cpuChart.setOption(CpuOption, true);
+}
+
+function setGpuData(pcInfo) {
+    $("#gpuName").text(pcInfo.GpuName);
+
+    GpuOption.series[0].data[0].value = ( pcInfo.GpuTemperature ).toFixed(2) - 0;
+    if(pcInfo.GpuTemperature >= 50 && pcInfo.GpuTemperature <= 80){
+        GpuOption.series[0].itemStyle.color = '#f1803f'
+        GpuOption.series[0].itemStyle.shadowColor = '#a05c29'
+    }else if(pcInfo.GpuTemperature >= 81){
+        GpuOption.series[0].itemStyle.color = '#cd1717'
+        GpuOption.series[0].itemStyle.shadowColor = '#870e0e'
+    }else if(pcInfo.GpuTemperature <= 49){
+        GpuOption.series[0].itemStyle.color = '#55a10d'
+        GpuOption.series[0].itemStyle.shadowColor = '#438204'
+    }
+    GpuChart.setOption(GpuOption, true);
+}
+
+
+
+
 
 function bytesToSize(bytes) {
     var sizes = ['Bytes', 'GB', 'MB', 'GB', 'TB'];
@@ -327,6 +372,8 @@ function buildGpuChart() {
             }]
         }]
     };
+
+
 /*
     socket.on('status_cpu',function (data) {
         GpuOption.series[0].data[0].value = ( data ).toFixed(2) - 0;
