@@ -25,6 +25,14 @@ $(function () {
             img :'https://image.api.playstation.com/vulcan/img/cfn/11307MTvkumhOsLQiA_3g0ZbFhLnHOOWVw3qR4Rum7sKAh8I3THtbG0aa-P7dF7-miXzo1ceqN897MfxYZ7Qx-GaEZs8kq4X.png',
             audio: '',
             video:'https://audiomeucomputador.s3-sa-east-1.amazonaws.com/Ryu+Street+Fighter+-+Live+Engine+Wallpaper.mp4'
+        },{
+            name: 'Street Fighter 5',
+            bat: 'steam://rungameid/310950',
+            archive: '',
+            type: 'command',
+            img :'https://m.media-amazon.com/images/I/51TMgBQgCpL.jpg',
+            audio: '',
+            video:'https://audiomeucomputador.s3-sa-east-1.amazonaws.com/Ryu+Street+Fighter+-+Live+Engine+Wallpaper.mp4'
         },
     ]
      apps = [
