@@ -1,6 +1,14 @@
 $(function () {
 //Configuração dos aplicativos e jogos
-     games = [
+     games = [{
+         name: 'World of Warcraft',
+         bat: 'wow.bat',
+         archive: '',
+         type: 'exe',
+         img :'https://ovicio.com.br/wp-content/uploads/2020/09/20200926-world-of-warcraft-shadowlands-1200x675.jpg',
+         audio: '',
+         video:''
+     },
         {
             name: 'Cyberpunk 2077',
             bat: 'cyberpunk.bat',
@@ -23,14 +31,6 @@ $(function () {
             archive: '',
             type: 'command',
             img :'https://image.api.playstation.com/vulcan/img/cfn/11307MTvkumhOsLQiA_3g0ZbFhLnHOOWVw3qR4Rum7sKAh8I3THtbG0aa-P7dF7-miXzo1ceqN897MfxYZ7Qx-GaEZs8kq4X.png',
-            audio: '',
-            video:'https://audiomeucomputador.s3-sa-east-1.amazonaws.com/Ryu+Street+Fighter+-+Live+Engine+Wallpaper.mp4'
-        },{
-            name: 'Street Fighter 5',
-            bat: 'steam://rungameid/310950',
-            archive: '',
-            type: 'command',
-            img :'https://m.media-amazon.com/images/I/51TMgBQgCpL.jpg',
             audio: '',
             video:'https://audiomeucomputador.s3-sa-east-1.amazonaws.com/Ryu+Street+Fighter+-+Live+Engine+Wallpaper.mp4'
         },

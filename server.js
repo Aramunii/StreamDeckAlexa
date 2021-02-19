@@ -17,6 +17,8 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html')
 });
 
+
+
 io.on("connection", async function (client) {
     client.on('abrir', (data) => {
         if (data.type == 'emulator') {
@@ -87,6 +89,10 @@ channel.bind('client-Server', function(data) {
     console.log('An event was triggered with message: ' + data.infos.bat);
 });
 
+channel.bind('client-wow',function (data) {
+        console.log('VEIO DO CLIENT DO WOW')
+})
+
 
 channel.bind('client-pcinfos',function (data) {
 
@@ -97,13 +103,14 @@ channel.bind('client-pcinfos',function (data) {
             return response.json();
         }).then(function(data) {
             responseJson = data;
+
             pcInfo = {
                 memoryRam : responseJson[121].value,
-                TotalRam : responseJson[122].value + responseJson[120].value,
+                TotalRam : responseJson[120].value + responseJson[122].value,
                 CpuUsage : responseJson[21].value,
                 CpuName : responseJson[21].source.split(':')[1],
                 GpuTemperature : responseJson[73].value,
-                GpuName : responseJson[73].source.split(':')[1],
+                GpuName : responseJson[68].source.split(':')[1],
             }
         channel.trigger('client-pcinfos-load',{
                 pcInfo: pcInfo
