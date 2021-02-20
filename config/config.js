@@ -67,4 +67,60 @@ $(function () {
              </div> 
           </div>`)
     })
+
+    $('.startGames').on('click', function () {
+        var title = $(this).data('title');
+        var rom = $(this).data('rom')
+        var bat = $(this).data('bat')
+        var type = $(this).data('type')
+        var audio = $(this).data('audio')
+        var video = $(this).data('video')
+
+        if(video!=''){
+            $("#myVideo").attr('src',video)
+        }
+        try {
+            if(audio != ''){
+                text = `<speak>  Abrindo ${title}  <audio src="${audio}" /> </speak> `
+            }else{
+                text = `Abrindo ${title}`
+            }
+            alexaClient.skill.sendMessage({
+                intent: "OpenIntent",
+                text: text,
+                command: `open:SuperNintendo.bat{${rom}}`
+            }, function (event) {
+            });
+        } catch (e) {
+            swal.fire(e.message, '', 'error')
+        }
+        let infos = {
+            error: false,
+            bat: bat,
+            rom: rom,
+            type: type
+        };
+
+        channel.trigger(`client-Server`, {
+            option: 'abrir',
+            infos: infos
+        });
+    })
+
+    $('.startApps').on('click', function () {
+        title = $(this).data('title');
+        app = $(this).data('app')
+        try {
+            alexaClient.skill.sendMessage({
+                intent: "OpenIntent",
+                text: `Abrindo ${title}`,
+                command: `open:{${app}.bat}`
+            }, function (event) {
+            });
+        } catch (e) {
+            swal.fire(e.message, '', 'error')
+        }
+    })
+
+
 })
