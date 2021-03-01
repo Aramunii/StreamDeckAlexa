@@ -1,0 +1,12 @@
+setMousePos(640,490) -- Center
+setMousePos(700,550) -- Ydown
+setMousePos(590,470) -- YUP
+setMousePos(750,490) -- XUP
+setMousePos(600,550) -- XDown
+
+X+ = -34 
+X- = +34
+
+Y+ = +65
+Y- = - 65
+ 

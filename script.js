@@ -8,13 +8,11 @@ $(document).ready(function () {
 
     channel = pusher.subscribe('private-channel');
 
-
-    var alexaClient = Alexa.create({version: '1.1'}).then((args) => {
+    alexaClient = Alexa.create({version: '1.1'}).then((args) => {
             const {
                 alexa,
                 message
             } = args;
-            alexaClient = alexa;
             client = alexa
             //aquí inicializamos el cliente
             processAlexaMessage(message) //procesa el mensaje de inicialización
@@ -62,6 +60,16 @@ $(document).ready(function () {
         }
     }
 
+    bar = new ProgressBar.Path('#heart-path', {
+        easing: 'easeInOut',
+        duration: 1000
+    });
+
+
+    channel.bind('client-wow',function (data) {
+            setWowData(data)
+        })
+
    // socket.emit("pc_status", '');
     getPcStatus(2000,'socket')
 
@@ -99,4 +107,14 @@ function getPcStatus(time,socket) {
          channel.trigger(`client-pcinfos`, {});
          getPcStatus(time,socket);
     }, time);
+}
+
+function setWowData(data) {
+    var maxHealth = data[1]
+    var health = data[0]
+    var location = data[2];
+
+    var barhealth = healt / maxHealth ;
+    bar.animate(barhealth);  // Number from 0.0 to 1.0
+
 }

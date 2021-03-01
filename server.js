@@ -89,9 +89,6 @@ channel.bind('client-Server', function(data) {
     console.log('An event was triggered with message: ' + data.infos.bat);
 });
 
-channel.bind('client-wow',function (data) {
-        console.log('VEIO DO CLIENT DO WOW')
-})
 
 
 channel.bind('client-pcinfos',function (data) {
