@@ -113,9 +113,9 @@ function setWowData(data) {
     var maxHealth = data[1]
     var health = data[0]
     var locationMap = data[2];
-
+    console.log('teste')
     $('#teste2').text(locationMap)
-    var barhealth = healt / maxHealth ;
+    var barhealth = health / maxHealth ;
     bar.animate(barhealth);  // Number from 0.0 to 1.0
 
 }
