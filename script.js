@@ -111,10 +111,9 @@ function getPcStatus(time,socket) {
 
 function setWowData(data) {
     try{
-        var maxHealth = data[1]
-        var health = data[0]
+        var maxHealth = data[1].replace(/\D/g,'');
+        var health = data[0].replace(/\D/g,'')
         var locationMap = data[2];
-        console.log('teste')
         $('#teste2').text(locationMap)
         var barhealth = health / maxHealth ;
         bar.animate(barhealth);  // Number from 0.0 to 1.0
