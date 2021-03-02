@@ -120,7 +120,7 @@ function setWowData(data) {
 
         if(locationMap != locationMap_old) {
             locationMap_old = locationMap
-            alexaClient.skill.sendMessage({
+            client.skill.sendMessage({
                 intent: "locationIntent",
                 locationMap: locationMap,
             });
@@ -134,6 +134,7 @@ function setWowData(data) {
 
 
     }catch (e) {
+        swal.fire(e.message, '', 'error')
 
     }
 
