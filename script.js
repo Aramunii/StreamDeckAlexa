@@ -117,15 +117,7 @@ function setWowData(data) {
         var maxHealth = data[1].replace(/\D/g,'');
         var health = data[0].replace(/\D/g,'')
         var locationMap = data[2];
-        swal.fire(locationMap, '', 'error')
-
-        if(locationMap != locationMap_old) {
-            locationMap_old = locationMap
-            client.skill.sendMessage({
-                intent: "locationIntent",
-                locationMap: locationMap,
-            });
-        }
+       
 
 
         $('#teste2').text(locationMap)
