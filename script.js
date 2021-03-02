@@ -110,15 +110,31 @@ function getPcStatus(time,socket) {
 }
 
 function setWowData(data) {
+
+    locationMap_old = null;
+
     try{
         var maxHealth = data[1].replace(/\D/g,'');
         var health = data[0].replace(/\D/g,'')
         var locationMap = data[2];
+
+        if(locationMap != locationMap_old) {
+            locationMap_old = locationMap
+            alexaClient.skill.sendMessage({
+                intent: "locationIntent",
+                locationMap: locationMap,
+            });
+        }
+
+
         $('#teste2').text(locationMap)
         var barhealth = health / maxHealth ;
         bar.animate(barhealth);  // Number from 0.0 to 1.0
+
+
+
     }catch (e) {
-        swal.fire(e.message, '', 'error')
+
     }
 
 
