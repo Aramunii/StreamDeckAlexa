@@ -117,17 +117,24 @@ function setWowData(data) {
         var maxHealth = data[1].replace(/\D/g,'');
         var health = data[0].replace(/\D/g,'')
         var locationMap = data[2];
-       
-
-
         $('#teste2').text(locationMap)
         var barhealth = health / maxHealth ;
         bar.animate(barhealth);  // Number from 0.0 to 1.0
 
+        if(locationMap != locationMap_old) {
+            locationMap_old = locationMap
+            try{
+                client.skill.sendMessage({
+                    intent: "locationIntent",
+                    locationMap: locationMap,
+                });
+            }
+            catch(e){
+            }
 
+        }
 
     }catch (e) {
-        swal.fire(e.message, '', 'error')
 
     }
 
