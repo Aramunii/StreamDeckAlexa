@@ -125,7 +125,7 @@ function setWowData(data) {
             locationMap_old = locationMap
             try{
                 client.skill.sendMessage({
-                    intent: "locationIntent",
+                    intent: "LocationIntent",
                     locationMap: locationMap,
                 });
             }
